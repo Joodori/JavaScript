@@ -52,10 +52,9 @@ let house = {
 }
 
 
-
-
 house.print();
 house.name;
 house.cat.name = '고양이333';
 house.print();
 
+// git testing
