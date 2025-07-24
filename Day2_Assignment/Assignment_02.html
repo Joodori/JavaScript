@@ -1,82 +1,164 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>기능이 더 많은 입장료 계산기</title>
-    </head>
-    <body>
-         <div>
-            <p> 입장료 계산기</p>
-            <div id="timer"> </div>
-         </div>
 
-         <div> <!--화면구성에서 성인 수 부분-->
-            <span> 성인 수   </span>
-            <input id="ad" type="text" value="0">
-            <span>명</span>
-         </div>
+<head>
+   <meta charset="UTF-8">
+   <title>기능이 더 많은 입장료 계산기</title>
+</head>
 
-         <div> <!--화면구성에서 어린이 수 부분-->
-            <span> 어린이 수 </span>
-            <input id="ch" type="text" value="0">
-            <span>명</span>
-         </div>
+<body>
+   <div>
+      <p> 입장료 계산기</p>
+      <div id="timer"> </div>
+   </div>
 
-         <div> <!--계산버튼 + 입장료 나타내는 부분-->
-            <button onclick="calc()"> 계산하기 </button>
-            <div id="output"> 입장료 : </div>
-         </div>
+   <div> <!--화면구성에서 성인 수 부분-->
+      <span> 성인 수 </span>
+      <input id="ad" type="text" value="0">
+      <span>명</span>
+   </div>
 
-         <!--할인요금 나타내는 부분-->
-        <div>
-            <span> 단체할인 </span>
-            <input type="radio" name="radioButton" value="yes"> <span>예</span>
-            <input type="radio" name="radioButton" value="no" checked> <span>아니오</span>
-            <img id="output1" src="images/happy.jpg" width="50">
-        </div>
+   <div> <!--화면구성에서 어린이 수 부분-->
+      <span> 어린이 수 </span>
+      <input id="ch" type="text" value="0">
+      <span>명</span>
+   </div>
 
-         <div>
-            <p> 1인당 요금 : </p> 
-            <p> 성인 1인당  20,000원 </p>
-            <p> 어린이 1인당 9,900원 </p>
-            <p> 단체할인 : 5명 이상 20% </p> 
-         </div>
+   <div> <!--계산버튼 + 입장료 나타내는 부분-->
+      <button onclick="calc()"> 계산하기 </button>
+      <div id="output"> 입장료 : </div>
+   </div>
 
-         <div>
-            <p>//</p>
-            <p> 야간 할인 </p>
-            <p> 성인 1인당 12,000원 </p>
-            <p> 어린이 1인당 4,500원 </p>
-            <p> 오후 6시부터 야간할인이 적용됩니다. </p>
-         </div>
+   <!--할인요금 나타내는 부분-->
+   <div>
+      <span> 단체할인 </span>
+      <input type="radio" name="radioButton" value="yes"> <span>예</span>
+      <input type="radio" name="radioButton" value="no" checked> <span>아니오</span>
+      <img id="output1" src="images/happy.jpg" width="50">
+   </div>
 
-         <div>
-            <p>//</p>
-            <p>이벤트</p>
-            <p>입장인원 : 총 ? 명</p>
-            <p>당첨자 : ㅇㅇㅇㅇㅇㅇㅇㅇ</p>
-            <p>입장하시는 분들은 번호표를 받으세요.</p>
-            <p>여섯분을 추첨하여 스타벅스 쿠폰을 드립니다.</p>
-         </div>
+   <div>
+      <p> 1인당 요금 : </p>
+      <p> 성인 1인당 20,000원 </p>
+      <p> 어린이 1인당 9,900원 </p>
+      <p> 단체할인 : 5명 이상 20% </p>
+   </div>
 
-    <script src="moment.js"></script>
-    <script>
+   <div>
+      <p>//</p>
+      <p> 야간 할인 </p>
+      <p> 성인 1인당 12,000원 </p>
+      <p> 어린이 1인당 4,500원 </p>
+      <p> 오후 6시부터 야간할인이 적용됩니다. </p>
+   </div>
+
+   <div>
+      <p>//</p>
+      <p>이벤트</p> <button onclick="lotto()">추첨하기</button>
+      <p>입장인원 : 총 80 명</p>
+      <div id="lottoResult"></div>
+      <p>당첨자 : ㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+      <p>입장하시는 분들은 번호표를 받으세요.</p>
+      <p>여섯분을 추첨하여 스타벅스 쿠폰을 드립니다.</p>
+   </div>
+
+   <script src="moment.js"></script>
+   <script>
 
       window.addEventListener('DOMContentLoaded', () => {
-      console.log(`DOMContentLoaded 이벤트 호출됨.`);
-                
-      let output1 = document.querySelector('#timer')
-      // setInterval(a, b)    a는 함수 b는 숫자(ms)
-      setInterval(() => {
-      // 시간을 어떻게 띄워놓을지 형식을 맞춰서 curTime 변수에 넣음
-      let curTime = moment().format('YYYY-MM-DD HH:mm:ss')
-      output1.innerHTML = `<p>${curTime}</p>`;
-      }, 100)
+         console.log(`DOMContentLoaded 이벤트 호출됨.`);
+
+         let output1 = document.querySelector('#timer')
+         // setInterval(a, b)    a는 함수 b는 숫자(ms)만큼 뒤에 화면에 띄워줌
+         setInterval(() => {
+            // 시간을 어떻게 띄워놓을지 형식을 맞춰서 curTime 변수에 넣음
+            let curTime = moment().format('YYYY-MM-DD HH:mm:ss')
+            output1.innerHTML = `<p>${curTime}</p>`;
+         }, 100)
       })
-      
-      
+
+      // 계산을 실행하기위해 필요한 요소(element)들을 가져옴
+      let inputAd = document.querySelector('#ad');
+      let inputCh = document.querySelector('#ch');
+      let totalFee = document.querySelector('#output');
+      let output1 = document.querySelector('#output1');
+      let buttonYes = document.querySelector('#YES');
+      let buttonNo = document.querySelector('#NO');
+
+      function check() {
+         console.log('check 함수 호출됨');
+         let ad = Number(inputAd.value);
+         let ch = Number(inputCh.value);
+         let total = ad + ch;
+         console.log(`total = ${total}`);
+         if (total >= 5) {
+            buttonNo.checked = false;
+            buttonYes.checked = true;
+         } else {
+            buttonYes.checked = false;
+            buttonNo.checked = true;
+         }
+      }
+      // 이거로 입력값 바뀔때마다 실행함
+      inputAd.addEventListener('input', check);
+      inputCh.addEventListener('input', check);
 
 
-    </script>
-   </body>
+      function calc() {
+
+         console.log(`calc함수 호출됨`);
+
+         // 성인과 어린이 수를 숫자로 바꿔서 inputA와 inputC라는 변수상자에 넣음
+         let inputA = Number(inputAd.value);
+         let inputC = Number(inputCh.value);
+         let result = 0;
+
+         // inputA나 inputC가 숫자가 아닌 값이 들어간다면 알림을 뜨게 함
+         // 혹시 다시 계산하다가 오류를 대비하여 totalFee라는 부분을 초기화시켜줌
+         if (isNaN(inputA) || isNaN(inputC)) {
+            alert(`사용자가 입력한 값이 숫자가 아닙니다!`);
+            totalFee.innerHTML = `입장료 : `;
+            return;
+         } else if ((inputA < 0) || (inputC < 0)) {
+            alert(`음수는 입력되지 않아요!`);
+            totalFee.innerHTML = `입장료 : `;
+            return;
+         }
+         
+         //시간을 hour로 받아서 0~23시 중 18시가 넘으면 할인된 가격을 적어놓음
+         let timeCheck = moment().hour();
+         if (timeCheck >= 18) {
+            inputA = 10000;
+            inputC = 4500;
+         }
+
+         if (buttonYes.checked == true) {
+            result = (inputA * 20000 + inputC * 9900) * 0.8;
+         } else if (buttonNo.checked == true) {
+            result = inputA * 20000 + inputC * 9900;
+         }
+         totalFee.innerHTML = `입장료 : ${result}`;
+      }
+
+      // 로또함수 추가
+      // 랜덤 수 생성 1~80까지 그리고 배열에 push로 추가하기 + result라는 변수에 넣어서 출력함
+      // 정상작동
+      function lotto() {
+         let result = document.querySelector('#lottoResult');
+
+         let numbers = [];
+         for (let i = 0 ; i < 5; i++) {
+            let n1 = Math.random();
+            let n2 = Math.floor(n1*80) + 1;
+            numbers.push(n2);
+         }
+         result = numbers;
+         lottoResult.innerHTML = `당첨번호는 : ${result} 입니다.`;
+
+         
+      }
+
+   </script>
+</body>
+
 </html>
