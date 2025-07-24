@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- radio 버튼 추가하기 + 선택하면 alert 뜨게하기  + 시간 띄워놓기(momentsjs사용)-->
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>연습</title>
+    </head>
+    <body>
+        
+        <h1>연습 1</h1>  <!-- 웹페이지의 탭에 제목  ! -->
+
+        <div> 
+            <!--radio버튼이 한 div에 묶여있으면 하나만 선택됨 why? 한 영역에 묶여있기 때문에-->
+            <!--HTML에서 radio 버튼을 같은 name 속성으로 묶으면 "한 그룹에서 단 하나만 선택" 되게 동작-->
+            <input type="radio" name="gender" value="man" checked><span>남자</span>
+            <input type="radio" name="gender" value="woman"><span>여자</span>
+        </div>
+
+        <div>
+            <!--div안에 함수가 있으면 body안에 함수를 정의해주어야함 ! <script>형식으로 -->
+            <button onclick="show()">확인</button>
+        </div>
+
+        <div> <!--시간이 들어갈 공간을 만들어줌 ! -->
+            <div id="output1"></div>
+        </div>
+
+        <script src="moment.js"></script>
+        <script>
+
+            // 시간을 띄워놓기
+            window.addEventListener('DOMContentLoaded', () => {
+                console.log(`DOMContentLoaded 이벤트 호출됨.`);
+                
+                let output1 = document.querySelector('#output1')
+                // setInterval(a, b)    a는 함수 b는 숫자(ms)
+                setInterval(() => {
+                    
+                    // 시간을 어떻게 띄워놓을지 형식을 맞춰서 curTime 변수에 넣음
+                    let curTime = moment().format('YYYY-MM-DD HH:mm:ss')
+                    output1.innerHTML = `<p>${curTime}</p>`;  // output1이라는 <div id='output1'>에 아무것도 없어서 그걸 설정해줄 수 있음 (?)
+
+                }, 1000)
+            })
+
+
+            function show() {
+                console.log(`show함수 출력됨`);
+
+                // Element -> Tag           input Tag의 속성 중 name으로 찾겠다 !
+                let radios = document.getElementsByName('gender');
+                // find라는 함수에는 일종의 콜백함수를 만들어놓음__함수를 축약해서 넣어논 것임
+                let selected = Array.from(radios).find(elem => elem.checked);
+                console.log(`선택한 값 : ${selected.value}`) //selected의 input Tag가 나와서 그 value값을 알려줌 (man or woman)
+          
+                if (selected.value =='man') {
+                    alert(`남자가 선택되었어요`);                    
+                } else if (selected.value == 'woman') {
+                    alert(`여자가 선택되었어요`);
+                }
+
+                /* window.addEventListner에 이게 없으면 확인버튼을 웹페이지에서 눌렀을 때 시간이 나타나게됨
+                // 현재 시간 표시하기
+                let output1 = document.querySelector('#output1')
+                // setInterval(a, b)    a는 함수 b는 숫자(ms)
+                setInterval(() => {
+                    
+                    // 시간을 어떻게 띄워놓을지 형식을 맞춰서 curTime 변수에 넣음
+                    let curTime = moment().format('YYYY-MM-DD HH:mm:ss')
+                    output1.innerHTML = `<p>${curTime}</p>`;  // output1이라는 <div id='output1'>에 아무것도 없어서 그걸 설정해줄 수 있음 (?)
+
+                }, 1000)
+                */
+            }
+
+        </script>
+
+    </body>
+
+</html>

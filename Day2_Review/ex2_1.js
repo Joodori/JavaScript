@@ -1,5 +1,6 @@
-// 여러개의 값을 하나의 변수상자에 넣기
+// 배열 -------------------------------------------
 
+// 여러개의 값을 하나의 변수상자에 넣기
 let names = ['홍길동1', '홍길동2', '홍길동3']; // 3개의 칸에 글자를 집어넣음
 console.log(`names 배열 안에 있는 요소들의 개수 : ${names.length}`); 
 console.log(`names의 첫번째 칸에 들어있는 값은 ? : ${names[0]}`); // index는 0부터 시작함
@@ -26,6 +27,11 @@ console.log(`fishes 변수상자에 들어있는 요소의 개수 :  ${fishes.le
 // 배열[인덱스].속성     //typeof(배열[인덱스])
 console.log(`fishes 변수상자에 첫번째로 들어있는 물고기의 이름 : ${fishes[0].name} , 나이 : ${fishes[0].age} `);  
 console.log(`names 변수상자의 첫번째 칸에 들어가 있는 값의 자료형은? ${typeof(names[0])}`); 
+
+
+
+
+// 배열의 자료형 -------------------------------------------
 
 // 배열의 자료형은 object !
 console.log(`names 변수상자의 자료형은? : ${typeof(names)}`); 
@@ -55,12 +61,19 @@ console.log(`print 변수상자의 자료형은? : ${typeof(print)}`); // 자료
 // 자료형이라는 것은 string number boolean object(object/Array) function undefined ...  
 
 
+
+// 배열에 추가하기 -------------------------------------------
+
 // 배열에 값 추가하기 (배열에 추가하기 add, put 과 비슷함)
 fishes.push({
     name : '물고기3',
     age : 3
 })
 console.log(`fishes 변수상자에 들어있는 칸의 개수 : ${fishes.length}`);
+
+
+
+// 반복문-------------------------------------------
 
 // 각 칸의 값을 하나씩 확인하기
 // Java에서 반복문은 int i 였지만 javaScript에서는 let을 사용함 ! 
@@ -81,6 +94,10 @@ for (let fish of fishes) {
     console.log(`fishes의 ${i+1}번째 물고기 : ${fish.name}`);
     i += 1;
 }
+
+
+
+// forEach() -------------------------------------------
 
 // 앞에가 배열이면 forEach()를 사용할 수 있음
 // 콜백함수를 forEach에다가 만들 수 있음 forEach에서 parameter는 value - index / 순서 !
@@ -133,5 +150,62 @@ let attr2 = 'fishes'
 let attr3 = 'name';
 console.log(`집 안에 있는 첫번째 아이가 가지고 있는 첫번째 물고기의 이름은 어떻게될까요? : ${house[attr1][0][attr2][0][attr3]}`);
 // house - children[0] -> fishes[0] -> name 인데 너무 복잡함.
+
+
+
+
+// 객체의 속성(JSON - JavaScript) -------------------------------------------
+
+// 객체안의 속성을 모두 볼 수 있는 방법?
+// 붕어빵(객체) 안에 들어있는 속성들을 글자로 바꿔주기 -> JSON 포멧 (자바스크립트의 객체를 글자로 바꾼 것_복원도 가능) + ('로 들어가있던 것들이 "로 바뀜)
+let houseInfo = JSON.stringify(house);
+console.log(`house 정보 -> ${houseInfo}`);
+
+// JSON의 형식을 다시 자바스크립트에서 쓰던대로 만들어줌 (JSON.parse ( [JSON형식이었던 것] ) )
+let house2 = JSON.parse(houseInfo);
+console.log(`hosue2의 이름 : ${house2.name}`);
+
+
+
+// 해시테이블 -------------------------------------------
+
+// 해시테이블 사용하기
+let map = new Map();
+
+// 첫번째 칸의 key는 '강아지' value는 { name, age } 
+map.set('강아지', {
+    name : '강아지1',
+    age : 1
+})
+
+// 두번째 칸의 key는 '고양이' value는 { name, age }
+map.set('고양이', {
+    name : '고양이1',
+    age : 2
+})
+
+let dog = map.get('강아지');  // key값을 이용하여 dog라는 변수상자에 할당함
+console.log(`map에 있는 강아지는 : ${dog.name}`);
+
+
+// 앞에서 했던 방법과 의미는 같음 그러나 위의 방법이 더 좋음 !
+// 내장 메서드도 적을 뿐더러 기본 객체의 키와 중복될 가능성이 있기 때문에 권장되지 않음 // Map은 중복될일이 X
+let map2 = {}
+map2['강아지'] = {
+    name : '강아지1',
+    age : 1
+}
+map2['고양이'] = {
+    name : '고양이1',
+    age : 2
+}
+let dog2 = map2['강아지'];
+console.log(`강아지의 이름은 : ${dog2.name}`);
+
+
+
+
+
+
 
 
