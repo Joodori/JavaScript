@@ -26,8 +26,39 @@
             <div id="output1"></div>
         </div>
 
+        <!-- isNaN구하기 -->
+        <div>
+            <input id="input1" type="text" value="10">
+            <input id="input2" type="text" value="20">
+            <button onclick="add()">더하기</button>
+
+            <div id="output2">
+
+            </div>
+        </div>
+
+
         <script src="moment.js"></script>
         <script>
+
+            // add함수 만들기
+            function add() {
+                let input1 = document.querySelector('#input1');
+                let input2 = document.querySelector('#input2');
+
+                let intputA = input1.value;
+                let inputB = input2.value;
+
+                let a = Number(inputA);
+                let b = Number(inputB);
+
+                let result = a + b;
+
+                let output2 = document.querySelector('#output2');
+                output2.innerHTML = `더하기 결과 : ${result}`;
+            }
+
+
 
             // 시간을 띄워놓기
             window.addEventListener('DOMContentLoaded', () => {
