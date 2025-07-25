@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>로그인 페이지</title>
+    </head>
+    <body>
+
+       <div>
+            <h3>로그인하세요</h3>
+       </div>
+        
+       <div>
+            <input type="text" id="input1"> <!-- id -->
+            <input type="text" id="input2"> <!-- password -->
+
+            <button onclick="login()"> 로그인하기 </button>
+       </div>
+
+
+       <script>
+
+            function login() {
+                console.log(`login 함수 실행됨`);
+
+                const form = document.createElement('form'); 
+                form.setAttribute('action', '/page/welcome'); 
+                form.setAttribute('method', 'get'); 
+
+                const input1 = document.querySelector('#input1'); 
+                const input2 = document.querySelector('#input2');
+
+                // id를 집어넣을거야
+                const data1 = document.createElement('input'); 
+                data1.setAttribute('type', 'hidden'); 
+                data1.setAttribute('name','name');
+                data1.setAttribute('value',input1.value);
+                form.appendChild(data1); 
+
+                // password를 집어넣을거야
+                const data2 = document.createElement('input');
+                data2.setAttribute('type','hidden');
+                data2.setAttribute('name','password');
+                data2.setAttribute('value',input2.value);
+                form.appendChild(data2);
+
+                document.body.appendChild(form);
+
+                form.submit(); // 웹페이지를 /page/welcome으로 바꿔줘
+            }
+
+       </script>
+    </body>
+</html>

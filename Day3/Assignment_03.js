@@ -1,0 +1,129 @@
+// 여러개의 화면 만들고 전환하기
+// 화면(1) : 아이디와 비밀번호를 만들고 로그인하기
+// 화면(2) : ㅇㅇㅇ님 환영합니다 + [고객관리, 상품관리, 매출관리] + 선택했던 화면 = 뭐였는지 + 로그아웃
+// 화면(3,4,5) : [고객관리, 상품관리, 매출관리] + 돌아간다.
+
+// 웹서버 만들기
+
+// 1. 다른 개발자가 만든 모듈(라이브러리) 불러오기
+const http = require('http');
+const express = require('express');
+
+// 2. 익스프레스를 이용해서 웹서버를 위한 객체 만들기
+const app = express();
+
+// 6. 뷰 사용을 위해 설정하기
+app.set('views', './views');
+app.set('view engine', 'ejs');
+
+// 5. 라우터 추가하기
+const router = express.Router();
+app.use('/', router)
+
+
+// login 페이지로 이동하기
+router.route('/page/login2').get((req, res) => {
+    console.log(`/page/login2 요청됨`)
+
+    const context = {
+    }
+
+    req.app.render('login2', context, (err, html) => {
+        if (err) {
+            console.log(`뷰 처리 중 에러 발생 ${err}`);
+            return;
+        }
+        res.writeHead(200, { 'Content-Type': 'text/html;charset=utf8' })
+        res.end(html)
+    })
+})
+
+// welcome화면 (처음 3개 선택화면으로)
+router.route('/page/welcome').get((req, res) => {
+    console.log(`/page/welcome 요청됨`);
+
+    const params = req.query;
+    console.log(`요청 파라미터 -> ${JSON.stringify(params)}`);
+
+    const context = {
+        name: params.name
+    }
+    req.app.render('welcome', context, (err, html) => {
+        if (err) {
+            console.log(`뷰 처리 중 에러 발생 ${err}`);
+            return;
+        }
+        res.writeHead(200, { 'Content-Type': 'text/html;charset=utf8' })
+        res.end(html)
+    })
+})
+
+// 고객관리 화면
+router.route('/page/customer').get((req, res) => {
+    console.log(`/page/customer 요청됨`);
+
+    const params = req.query;
+    console.log(`요청 파라미터 -> ${JSON.stringify(params)}`);
+
+    const context = {
+        name: params.name ,
+        password: params.password
+    }
+    req.app.render('customer', context, (err, html) => {
+        if (err) {
+            console.log(`뷰 처리 중 에러 발생 ${err}`);
+            return;
+        }
+        res.writeHead(200, { 'Content-Type': 'text/html;charset=utf8' })
+        res.end(html)
+    })
+})
+
+// 상품관리 화면
+router.route('/page/product').get((req, res) => {
+    console.log(`/page/welcome 요청됨`);
+
+    const params = req.query;
+    console.log(`요청 파라미터 -> ${JSON.stringify(params)}`);
+
+    const context = {
+        name: params.name ,
+        password: params.password
+    }
+    req.app.render('product', context, (err, html) => {
+        if (err) {
+            console.log(`뷰 처리 중 에러 발생 ${err}`);
+            return;
+        }
+        res.writeHead(200, { 'Content-Type': 'text/html;charset=utf8' })
+        res.end(html)
+    })
+})
+
+// 매출관리 화면
+router.route('/page/sales').get((req, res) => {
+    console.log(`/page/welcome 요청됨`);
+
+    const params = req.query;
+    console.log(`요청 파라미터 -> ${JSON.stringify(params)}`);
+
+    const context = {
+        name: params.name ,
+        password: params.password
+    }
+    req.app.render('sales', context, (err, html) => {
+        if (err) {
+            console.log(`뷰 처리 중 에러 발생 ${err}`);
+            return;
+        }
+        res.writeHead(200, { 'Content-Type': 'text/html;charset=utf8' })
+        res.end(html)
+    })
+})
+
+
+// 3. 웹서버 실행하기
+// 7001번 포트로 웹서버가 대기하게 됨
+http.createServer(app).listen(7003, () => {
+    console.log(`웹서버 실행됨`);
+})

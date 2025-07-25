@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>로그인 후 페이지</title>
+    </head>
+    <body>
+        <div>
+            <h2> <%= name %>님 환영합니다 ! </h2>
+
+            <button onclick="customer()">고객관리</button>
+            <button onclick="product()">상품관리</button>
+            <button onclick="sales()">매출관리</button>
+        </div>
+
+        <div>
+            <h3> 선택했던 화면 : ?? </h3>
+            <button onclick="logout()">로그아웃</button>
+        </div>
+
+        <script>
+            function customer() {
+                const form = document.createElement('form');
+                form.setAttribute(`action','/page/customer?name=<%=name%>`);
+                form.setAttribute('method','get');
+                
+                const data1 = document.createElement('input1'); 
+                data1.setAttribute('type', 'hidden'); 
+                data1.setAttribute('name','name');
+                data1.setAttribute('value', name);
+                form.appendChild(data1); 
+
+                const data2 = document.createElement('input2'); 
+                data2.setAttribute('type', 'hidden'); 
+                data2.setAttribute('name','password');
+                data2.setAttribute('value', password);
+                form.appendChild(data2); 
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+            function product() {
+                const form = document.createElement('form');
+                form.setAttribute('action','/page/product?name=<%=name%>');
+                form.setAttribute('method','get');
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+            function sales() {
+                const form = document.createElement('form');
+                form.setAttribute('action','/page/sales?name=<%=name%>');
+                form.setAttribute('method','get');
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+            function logout() {
+                const form = document.createElement('form');
+                form.setAttribute('action','/page/login2');
+                form.setAttribute('method','get');
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+        </script>
+    </body>
+</html>

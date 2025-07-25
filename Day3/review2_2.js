@@ -32,6 +32,7 @@ console.log(`더하기 결과 : ${output1}`);
 const add2 = (a, b, callback) => {
     const result = a + b; // 일단 먼저 result라는 변수상자에 a + b값을 넣고 callback의 인자로 넣어줄 것임
     callback(result); 
+    // callback(a+b);
     // callback이 일단 함수기는한데 들어가는 값은 result로 할거야. 함수를 어떻게 할지는 너가 정해 
     // 함수를 너가 항상 정해야하기 때문에 화살표함수를 이용하는것(?)
 }

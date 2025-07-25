@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>웹서버에서 보내온 페이지</title>
+    </head>
+    <body>
+
+       <div>
+            <h1>프로그램 이름 : <%= name %></h1>
+            <h3>로그인하세요</h3>
+       </div>
+        
+       <div>
+            <!--로그인을 하면 URL이 바뀌어야하는데 어떻게? form~-->
+            <form action="/page/first" method="get">
+
+                <input type="text" name="username" value="">
+                <input type="password" name="password" value="">
+
+                <button>로그인 (자바스크립트코드를 사용하지않은 방법 ! )</button>
+            </form>
+       </div>
+
+       <div>
+            <input type="text" id="input1"> <!-- id -->
+            <input type="text" id="input2"> <!-- password -->
+
+            <button onclick="login()">로그인 (자바스크립트 코드를 잘 활용한 방법 ! )</button>
+       </div>
+
+
+       <script>
+
+            function login() {  //  line 25~30의 구역에서 사용할 함수들임
+                console.log(`login 함수 실행됨`);
+
+                const form = document.createElement('form'); // 이렇게하면 form이라는 element를 만들어줌 ! 
+                form.setAttribute('action', '/page/first'); // 생성된 form의 속성을 뭐로 할지  적는중 // <form action="/page/first"> [emt] </form>
+                form.setAttribute('method', 'get');  // method="get" 이렇게 // <form action"/page/first" method="get"> [emt] </form>
+
+                const input1 = document.querySelector('#input1');  // line 25~부터
+                const input2 = document.querySelector('#input2');
+
+                // input1이라는 아이디를 가진 친구에게 속성을 집어넣을거야
+                // <input type="text" id="input1">
+                const data1 = document.createElement('input'); 
+                data1.setAttribute('type', 'hidden'); // 화면에 보이지않게 만드는 것 
+                data1.setAttribute('name','username');
+                data1.setAttribute('value',input1.value);
+                form.appendChild(data1); 
+
+                // password를 집어넣을거야
+                const data2 = document.createElement('input');
+                data2.setAttribute('type','hidden');
+                data2.setAttribute('name','password');
+                data2.setAttribute('value',input2.value);
+                form.appendChild(data2);
+
+                // form appendChild가 18 19 Line 처럼 만들어줌
+
+                document.body.appendChild(form);
+
+                form.submit(); // 요청을 보내는 역할 : 이게 login함수가 끝나면서 웹페이지를 바꿀 수 있게 해줌
+            }
+
+       </script>
+
+
+    </body>
+</html>
