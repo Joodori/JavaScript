@@ -1,102 +1,119 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>입장료 계산기</title>
-    </head>
-    <body>
 
-        <div> <!--화면구성에서 성인 수 부분-->
-            <span> 성인 수   </span>
-            <input id="ad" type="text" value="0">
-            <span>명</span>
+<head>
+    <meta charset="UTF-8">
+    <title>입장료 계산기</title>
+</head>
+
+<body>
+
+    <div> <!--화면구성에서 성인 수 부분-->
+        <span> 성인 수 </span>
+        <input id="ad" type="text" value="0">
+        <span>명</span>
+    </div>
+
+    <div> <!--화면구성에서 어린이 수 부분-->
+        <span> 어린이 수 </span>
+        <input id="ch" type="text" value="0">
+        <span>명</span>
+    </div>
+
+    <div> <!--계산버튼 + 입장료 나타내는 부분-->
+        <button onclick="calc()"> 계산하기 </button>
+        <div id="output"> 입장료 : </div>
+    </div>
+
+    <div> <!--할인요금 나타내는 부분-->
+        <div>
+            <span> 단체할인 </span>
+            <input type="radio" id="YES" name="radioButton" value="yes"> <span>예</span>
+            <input type="radio" id="NO" name="radioButton" value="no"> <span>아니오</span>
+            <img id="output1" src="images/happy.jpg" width="50">
+        </div>
+        <div>
+            <p> 성인 1인당 20,000원 </p>
+            <p> 어린이 1인당 9,900원 </p>
+            <p> 단체할인 : 5명 이상 20% </p>
         </div>
 
-        <div> <!--화면구성에서 어린이 수 부분-->
-            <span> 어린이 수 </span>
-            <input id="ch" type="text" value="0">
-            <span>명</span>
-        </div>
+    </div>
 
-        <div> <!--계산버튼 + 입장료 나타내는 부분-->
-            <button onclick="calc()"> 계산하기 </button>
-            <div id="output"> 입장료 : </div>
-        </div>
+    <!-- 이 부분부터 calc()함수 작성 + 사람 수 바뀌게 + isNaN -->
+    <script>
 
-        <div> <!--할인요금 나타내는 부분-->
-            <div>
-                <span> 단체할인 </span>
-                <input type="radio" id="YES" name="radioButton" value="yes"> <span>예</span>
-                <input type="radio" id="NO" name="radioButton" value="no"> <span>아니오</span>
-                <img id="output1" src="images/happy.jpg" width="50">
-            </div>
-            <div> 
-                <p> 성인 1인당  20,000원 </p>
-                <p> 어린이 1인당 9,900원 </p>
-                <p> 단체할인 : 5명 이상 20% </p> 
-            </div>
+        // 먼저 성인과 어린이 수 그리고 입장료가 표시되는 요소들을 찾아놓음
+        let inputAd = document.querySelector('#ad');
+        let inputCh = document.querySelector('#ch');
+        let totalFee = document.querySelector('#output');
+        let output1 = document.querySelector('#output1');
+        let buttonYes = document.querySelector('#YES');
+        let buttonNo = document.querySelector('#NO');
 
-        </div>
-
-        <!-- 이 부분부터 calc()함수 작성 + 사람 수 바뀌게 + isNaN -->
-        <script>
-
-            // 먼저 성인과 어린이 수 그리고 입장료가 표시되는 요소들을 찾아놓음
-            let inputAd = document.querySelector('#ad');
-            let inputCh = document.querySelector('#ch');
-            let totalFee = document.querySelector('#output');
-            let output1 = document.querySelector('#output1');
-            let buttonYes = document.querySelector('#YES');
-            let buttonNo = document.querySelector('#NO');
-
-            // 다섯명이 넘어가면 단체할인 버튼에 체크표시를 함
-            function check() {
-                console.log('check 함수 호출됨');
-                let ad = Number(inputAd.value);
-                let ch = Number(inputCh.value);
-                let total = ad + ch;
-                console.log(`total = ${total}`);
-                if (total >= 5) {
-                    buttonNo.checked = false; 
-                    buttonYes.checked = true;
-                } else {
-                    buttonYes.checked = false;
-                    buttonNo.checked = true;
-                }
+        // 다섯명이 넘어가면 단체할인 버튼에 체크표시를 함
+        function check() {
+            console.log('check 함수 호출됨');
+            let ad = Number(inputAd.value);
+            let ch = Number(inputCh.value);
+            let total = ad + ch;
+            console.log(`total = ${total}`);
+            if (total >= 5) {
+                buttonNo.checked = false;
+                buttonYes.checked = true;
+            } else {
+                buttonYes.checked = false;
+                buttonNo.checked = true;
             }
+        }
 
-            function calc() {
-                console.log(`calc함수 호출됨`);
-                
-                // 성인과 어린이 수를 숫자로 바꿔서 inputA와 inputC라는 변수상자에 넣음
-                let inputA = Number(inputAd.value);
-                let inputC = Number(inputCh.value);
-                let result = 0;
+        function calc() {
+            console.log(`calc함수 호출됨`);
 
-                // inputA나 inputC가 숫자가 아닌 값이 들어간다면 알림을 뜨게 함
-                // 혹시 다시 계산하다가 오류를 대비하여 totalFee라는 부분을 초기화시켜줌
-                if (isNaN(inputA) || isNaN(inputC)) {
-                    alert(`사용자가 입력한 값이 숫자가 아닙니다!`);
-                    totalFee.innerHTML = `입장료 : `;
-                    return;
-                } else if ((inputA < 0) || (inputC < 0)) {
-                    alert(`음수는 입력되지 않아요!`);
-                    totalFee.innerHTML = `입장료 : `;
-                    return;
-                }
-                
-                if (buttonYes.checked == true) {
-                    result = (inputA*20000 + inputC*9900)*0.8;
-                } else if (buttonNo.checked == true) {
-                    result = inputA*20000 + inputC*9900;
-                }
-                totalFee.innerHTML = `입장료 : ${result}`;
+            // 성인과 어린이 수를 숫자로 바꿔서 inputA와 inputC라는 변수상자에 넣음
+            let inputA = Number(inputAd.value);
+            let inputC = Number(inputCh.value);
+            let result = 0;
 
-               
+            // inputA나 inputC가 숫자가 아닌 값이 들어간다면 알림을 뜨게 함
+            // 혹시 다시 계산하다가 오류를 대비하여 totalFee라는 부분을 초기화시켜줌
+            if (isNaN(inputA) || isNaN(inputC)) {
+                alert(`사용자가 입력한 값이 숫자가 아닙니다!`);
+                totalFee.innerHTML = `입장료 : `;
+                return;
+            } else if ((inputA < 0) || (inputC < 0)) {
+                alert(`음수는 입력되지 않아요!`);
+                totalFee.innerHTML = `입장료 : `;
+                return;
             }
-            // 이거로 입력값 바뀔때마다 실행함
-            inputAd.addEventListener('input', check);
-            inputCh.addEventListener('input', check);
-        </script>
-    </body>
+            setFace();
+
+            if (buttonYes.checked == true) {
+                result = (inputA * 20000 + inputC * 9900) * 0.8;
+            } else if (buttonNo.checked == true) {
+                result = inputA * 20000 + inputC * 9900;
+            }
+            totalFee.innerHTML = `입장료 : ${result}`;
+        }
+        // 이거로 입력값 바뀔때마다 실행함
+        inputAd.addEventListener('input', check);
+        inputCh.addEventListener('input', check);
+        function setFace() {
+            let inputA = Number(inputAd.value);
+            let inputC = Number(inputCh.value);
+            let sum = inputA + inputC;
+            if ((sum >= 5) && (buttonNo.checked == true)) {
+                output1.src = "images/sad.png";
+                alert(`단체할인을 클릭하세요 ! `);
+            } else if ((sum < 5) && (buttonYes.checked == true)) {
+                output1.src = "images/sad.png"
+               alert(`단체할인 적용이 되지 않습니다 ! `);
+            } else {
+                output1.src = "images/happy.jpg";
+            }
+        }
+
+    </script>
+</body>
+
 </html>
