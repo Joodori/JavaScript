@@ -6,7 +6,8 @@
     </head>
     <body>
         <div>
-            <h2> <%= name %>님 환영합니다 ! </h2>
+            <!--이미 login.ejs에서 form 안에 -->
+            <h2> <%= userName %>님 환영합니다 ! </h2>
 
             <button onclick="customer()">고객관리</button>
             <button onclick="product()">상품관리</button>
@@ -14,45 +15,88 @@
         </div>
 
         <div>
-            <h3> 선택했던 화면 : ?? </h3>
+            <h3> 선택했던 화면 : <%= page %> </h3>
             <button onclick="logout()">로그아웃</button>
         </div>
 
-        <script>
-            function customer() {
-                const form = document.createElement('form');
-                form.setAttribute(`action','/page/customer?name=<%=name%>`);
-                form.setAttribute('method','get');
-                
-                const data1 = document.createElement('input1'); 
-                data1.setAttribute('type', 'hidden'); 
-                data1.setAttribute('name','name');
-                data1.setAttribute('value', name);
-                form.appendChild(data1); 
+        <div> <!--고객이름과 화면정보를 hidden으로 담아놓음-->
+              <!--아래에서 document.querySelector로 받아오기위함-->
+            <input type="hidden" id="userName" value="<%= userName %>">
+            <input type="hidden" id="pageName" value="<%= page %>">
+        </div>
 
-                const data2 = document.createElement('input2'); 
-                data2.setAttribute('type', 'hidden'); 
-                data2.setAttribute('name','password');
-                data2.setAttribute('value', password);
-                form.appendChild(data2); 
+        <script>
+            // 고객관리버튼 클릭시 실행되는 함수
+            function customer() {
+                console.log(`고객관리 버튼 클릭됨`);
+
+                const form = document.createElement('form');
+                form.setAttribute('action','/page/customer');
+                form.setAttribute('method','get');
+
+                const username = document.querySelector('#name');
+                
+                const nameData = document.createElement('input'); 
+                nameData.setAttribute('type', 'hidden'); 
+                nameData.setAttribute('name','userName');
+                nameData.setAttribute('value', userName.value);
+                form.appendChild(nameData); 
+
+                const pageData = document.createElement('input');
+                pageData.setAttribute('type','hidden');
+                pageData.setAttribute('name','page');
+                pageData.setAttribute('value', pageName.value);
+                form.appendChild(pageData);
 
                 document.body.appendChild(form);
                 form.submit();
             }
 
             function product() {
+                console.log(`상품관리 버튼 클릭됨`);
+
                 const form = document.createElement('form');
-                form.setAttribute('action','/page/product?name=<%=name%>');
+                form.setAttribute('action','/page/product');
                 form.setAttribute('method','get');
+
+                const username = document.querySelector('#name');
+                
+                const nameData = document.createElement('input'); 
+                nameData.setAttribute('type', 'hidden'); 
+                nameData.setAttribute('name','userName');
+                nameData.setAttribute('value', userName.value);
+                form.appendChild(nameData); 
+
+                const pageData = document.createElement('input');
+                pageData.setAttribute('type','hidden');
+                pageData.setAttribute('name','page');
+                pageData.setAttribute('value', pageName.value);
+                form.appendChild(pageData);
 
                 document.body.appendChild(form);
                 form.submit();
             }
 
             function sales() {
+                console.log(`매출관리 버튼 클릭됨`);
+
                 const form = document.createElement('form');
-                form.setAttribute('action','/page/sales?name=<%=name%>');
+                form.setAttribute('action','/page/sales');
                 form.setAttribute('method','get');
+
+                const username = document.querySelector('#userName');
+                
+                const nameData = document.createElement('input'); 
+                nameData.setAttribute('type', 'hidden'); 
+                nameData.setAttribute('name','userName');
+                nameData.setAttribute('value', userName.value);
+                form.appendChild(nameData); 
+
+                const pageData = document.createElement('input');
+                pageData.setAttribute('type','hidden');
+                pageData.setAttribute('name','page');
+                pageData.setAttribute('value', pageName.value);
+                form.appendChild(pageData);
 
                 document.body.appendChild(form);
                 form.submit();

@@ -9,9 +9,14 @@
 <body>
     <div>
         <p>상품관리 페이지입니다.</p>
-        <p>접속하신 분의 이름은 : <%= name %> 입니다.</p>
+        <p>접속하신 분의 이름은 : <%= userName %> 입니다.</p>
 
         <button onclick="back()">돌아가기</button>
+    </div>
+
+    <div>
+        <input type="hidden" id="userName" value="<%= userName %>">
+        <input type="hidden" id="pageName" value="상품관리">
     </div>
 
     <script>
@@ -21,7 +26,22 @@
             const form = document.createElement('form');
             form.setAttribute('action', '/page/welcome');
             form.setAttribute('method', 'get');
-            
+
+            const username = document.querySelector('#userName');
+            const pagename = document.querySelector('#pageName');
+
+            const nameData = document.createElement('input');
+            nameData.setAttribute('type','hidden');
+            nameData.setAttribute('name','userName');
+            nameData.setAttribute('value',userName.value);
+            form.appendChild(nameData);
+
+            const pageData = document.createElement('input');
+            pageData.setAttribute('type','hidden');
+            pageData.setAttribute('name','page');
+            pageData.setAttribute('value',pageName.value);
+            form.appendChild(pageData);
+
             document.body.appendChild(form);
             form.submit();
         }

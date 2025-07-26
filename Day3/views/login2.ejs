@@ -7,14 +7,14 @@
     <body>
 
        <div>
-            <h3>로그인하세요</h3>
+            <h3> 안녕하세요 매장관리 시스템 로그인화면입니다.</h3>
        </div>
         
        <div>
-            <input type="text" id="input1"> <!-- id -->
-            <input type="text" id="input2"> <!-- password -->
+            <input type="text" id="userName"> <!-- id -->
+            <input type="password" id="password"> <!-- password는 화면에서 가려서 보여줄게 -->
 
-            <button onclick="login()"> 로그인하기 </button>
+            <button onclick="login()"> Login </button>
        </div>
 
 
@@ -27,22 +27,21 @@
                 form.setAttribute('action', '/page/welcome'); 
                 form.setAttribute('method', 'get'); 
 
-                const input1 = document.querySelector('#input1'); 
-                const input2 = document.querySelector('#input2');
+                const userName = document.querySelector('#userName'); 
 
                 // id를 집어넣을거야
-                const data1 = document.createElement('input'); 
-                data1.setAttribute('type', 'hidden'); 
-                data1.setAttribute('name','name');
-                data1.setAttribute('value',input1.value);
-                form.appendChild(data1); 
+                const nameData = document.createElement('input'); 
+                nameData.setAttribute('type', 'hidden'); 
+                nameData.setAttribute('name','userName');
+                nameData.setAttribute('value',userName.value);
+                form.appendChild(nameData); 
 
-                // password를 집어넣을거야
-                const data2 = document.createElement('input');
-                data2.setAttribute('type','hidden');
-                data2.setAttribute('name','password');
-                data2.setAttribute('value',input2.value);
-                form.appendChild(data2);
+                // welcome페이지에서 page정보가 나중에는 어차피 필요한 정보기 때문에 일단 비어있는 상태로 전달할게
+                const pageData = document.createElement('input');
+                pageData.setAttribute('type','hidden');
+                pageData.setAttribute('name','page');
+                pageData.setAttribute('value','');
+                form.appendChild(pageData);
 
                 document.body.appendChild(form);
 
