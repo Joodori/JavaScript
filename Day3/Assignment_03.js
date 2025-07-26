@@ -23,12 +23,14 @@ app.use('/', router)
 
 // login 페이지로 이동하기
 router.route('/page/login2').get((req, res) => {
-    console.log(`/page/login2 요청됨`)
+    // /page/login2로 들어오게되면 이게 실행될거야
+    console.log(`/page/login2 요청됨`)  // 콘솔창에 어떤 요청을 보냈는지 보여줌(누가 들어왔는지 서버에 알려주는 역할)
 
-    const context = {
+    const context = { // render의 함수에 필요한 context를 만들어놓음, 여기서는 전달할게 없으니까 비워둠
     }
 
     req.app.render('login2', context, (err, html) => {
+        // login2.ejs파일을 16~17Line에 설정해놓은 views로 읽어서 웹페이지가 어떻게 생겼는지 보여줘 !
         if (err) {
             console.log(`뷰 처리 중 에러 발생 ${err}`);
             return;
@@ -45,8 +47,13 @@ router.route('/page/welcome').get((req, res) => {
     const params = req.query;
     console.log(`요청 파라미터 -> ${JSON.stringify(params)}`);
 
-    const context = {
-        name: params.name
+    const context = {  
+        //welcome화면으로 왔는데 내가 필요한건 사용자의 userName(id로 입력받은 정보)과 제일 최근에 들어갔던 페이지를 알려주는 것이야
+        // 그렇기때문에 context안에 params = req.query로 받은 정보들을 넣어두도록 할게
+        // 이 req.query에서 받은 정보들은 어디서 왔을까? : login2에서 작성한 정보들이 form에 담겨서 전달된 것인데 /page/welcome [?userName=사용자이름&page=페이지]
+        // 저 대괄호 부분에서 읽은 것이다 ! 
+        userName: params.userName,
+        page: params.page
     }
     req.app.render('welcome', context, (err, html) => {
         if (err) {
@@ -66,8 +73,8 @@ router.route('/page/customer').get((req, res) => {
     console.log(`요청 파라미터 -> ${JSON.stringify(params)}`);
 
     const context = {
-        name: params.name ,
-        password: params.password
+        userName: params.userName ,
+        page: params.page
     }
     req.app.render('customer', context, (err, html) => {
         if (err) {
@@ -87,8 +94,8 @@ router.route('/page/product').get((req, res) => {
     console.log(`요청 파라미터 -> ${JSON.stringify(params)}`);
 
     const context = {
-        name: params.name ,
-        password: params.password
+        userName: params.userName ,
+        page: params.page
     }
     req.app.render('product', context, (err, html) => {
         if (err) {
@@ -108,8 +115,8 @@ router.route('/page/sales').get((req, res) => {
     console.log(`요청 파라미터 -> ${JSON.stringify(params)}`);
 
     const context = {
-        name: params.name ,
-        password: params.password
+        userName: params.userName ,
+        page: params.page
     }
     req.app.render('sales', context, (err, html) => {
         if (err) {
