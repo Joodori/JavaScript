@@ -24,7 +24,7 @@ const age3Int = Number(age3);
 const result1 = age2Int + age3Int;
 console.log(`더하기 결과는 : ${result1}`);
 
-// if  age2에서 만약 21이 아니라 21A라고 들어있으면 바꿀수가 없다 => age2Int가 NaN 으로 나오게되어서 result1또한 NaN으로 바뀜
+// if  age2에서 만약 21이 아니라 21A라고 들어있으면 바꿀수가 없다 => age2Int가 NaN 으로 나오기때문에 result1가 NaN으로 바뀜
 const age4Int = Number('21A');
 const result2 = age2Int + age4Int;
 if (isNaN(age4Int)) {
