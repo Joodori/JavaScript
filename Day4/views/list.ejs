@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>고객관리</title>
+    </head>
+    <body>
+
+        <h1>고객 리스트</h1>
+        
+        <div>
+            <table>
+                <tr> <!--컬럼 이름-->
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>전화번호</th>
+                </tr>
+                <!-- 각 행(레코드)에 대한 내용들을 for문을 이용하여 만듦-->
+                <% for (let i = 0; i < persons.length; i++) { %>
+                    <tr>
+                        <td><%= persons[i].id %></td>
+                        <td><%= persons[i].name %></td>
+                        <td><%= persons[i].age %></td>
+                        <td><%= persons[i].mobile %></td>
+                        <td><a href="/page/update">수정하기</a></td>
+                        <td><button onclick="del()">삭제하기</td>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+
+        <div>
+            <a href="/page/add">추가</a> <!--앵커태그-->
+        </div>
+        
+        <script>
+            function del() {
+                
+            }
+        </script>
+    </body>
+</html>
