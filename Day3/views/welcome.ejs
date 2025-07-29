@@ -1,116 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>로그인 후 페이지</title>
-    </head>
-    <body>
-        <div>
-            <!--이미 login.ejs에서 form 안에 -->
-            <h2> <%= userName %>님 환영합니다 ! </h2>
 
-            <button onclick="customer()">고객관리</button>
-            <button onclick="product()">상품관리</button>
-            <button onclick="sales()">매출관리</button>
-        </div>
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 후 페이지</title>
+</head>
 
-        <div>
-            <h3> 선택했던 화면 : <%= page %> </h3>
-            <button onclick="logout()">로그아웃</button>
-        </div>
+<body>
+    <div>
+        <h2>
+            <%= userName %>님 환영합니다 !
+        </h2>
+    </div>
+    <div>
+    <span>
+        <form action="/page/customer" method="get">
+            <input type="hidden" name="userName" value="<%= userName %>">
+            <input type="hidden" name="page" value="<%= page %>">
+            <button>고객관리</button>
+        </form>
 
-        <div> <!--고객이름과 화면정보를 hidden으로 담아놓음-->
-              <!--아래에서 document.querySelector로 받아오기위함-->
-            <input type="hidden" id="userName" value="<%= userName %>">
-            <input type="hidden" id="pageName" value="<%= page %>">
-        </div>
+        <form action="/page/product" method="get">
+            <input type="hidden" name="userName" value="<%= userName %>">
+            <input type="hidden" name="page" value="<%= page %>">
+            <button>상품관리</button>
+        </form>
 
-        <script>
-            // 고객관리버튼 클릭시 실행되는 함수
-            function customer() {
-                console.log(`고객관리 버튼 클릭됨`);
+        <form action="/page/sales" method="get">
+            <input type="hidden" name="userName" value="<%= userName %>">
+            <input type="hidden" name="page" value="<%= page %>">
+            <button>매출관리</button>
+        </form>
+    </span>
 
-                const form = document.createElement('form');
-                form.setAttribute('action','/page/customer');
-                form.setAttribute('method','get');
+    </div>
 
-                const username = document.querySelector('#userName');
-                
-                const nameData = document.createElement('input'); 
-                nameData.setAttribute('type', 'hidden'); 
-                nameData.setAttribute('name','userName');
-                nameData.setAttribute('value', userName.value);
-                form.appendChild(nameData); 
+    <div>
+        <h3> 선택했던 화면 : <%= page %> </h3>
+        <form action="/page/login2" method="get">
+            <button>로그아웃</button>            
+        </form>
+    </div>
+</body>
 
-                const pageData = document.createElement('input');
-                pageData.setAttribute('type','hidden');
-                pageData.setAttribute('name','page');
-                pageData.setAttribute('value', pageName.value);
-                form.appendChild(pageData);
-
-                document.body.appendChild(form);
-                form.submit();
-            }
-
-            function product() {
-                console.log(`상품관리 버튼 클릭됨`);
-
-                const form = document.createElement('form');
-                form.setAttribute('action','/page/product');
-                form.setAttribute('method','get');
-
-                const username = document.querySelector('#name');
-                
-                const nameData = document.createElement('input'); 
-                nameData.setAttribute('type', 'hidden'); 
-                nameData.setAttribute('name','userName');
-                nameData.setAttribute('value', userName.value);
-                form.appendChild(nameData); 
-
-                const pageData = document.createElement('input');
-                pageData.setAttribute('type','hidden');
-                pageData.setAttribute('name','page');
-                pageData.setAttribute('value', pageName.value);
-                form.appendChild(pageData);
-
-                document.body.appendChild(form);
-                form.submit();
-            }
-
-            function sales() {
-                console.log(`매출관리 버튼 클릭됨`);
-
-                const form = document.createElement('form');
-                form.setAttribute('action','/page/sales');
-                form.setAttribute('method','get');
-
-                const username = document.querySelector('#userName');
-                
-                const nameData = document.createElement('input'); 
-                nameData.setAttribute('type', 'hidden'); 
-                nameData.setAttribute('name','userName');
-                nameData.setAttribute('value', userName.value);
-                form.appendChild(nameData); 
-
-                const pageData = document.createElement('input');
-                pageData.setAttribute('type','hidden');
-                pageData.setAttribute('name','page');
-                pageData.setAttribute('value', pageName.value);
-                form.appendChild(pageData);
-
-                document.body.appendChild(form);
-                form.submit();
-            }
-
-            function logout() {
-                const form = document.createElement('form');
-                form.setAttribute('action','/page/login2');
-                form.setAttribute('method','get');
-
-                document.body.appendChild(form);
-                form.submit();
-            }
-
-        </script>
-    </body>
 </html>

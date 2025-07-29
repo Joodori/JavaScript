@@ -130,7 +130,7 @@ router.route('/page/sales').get((req, res) => {
 
 
 // 3. 웹서버 실행하기
-// 7001번 포트로 웹서버가 대기하게 됨
+// 7003번 포트로 웹서버가 대기하게 됨
 http.createServer(app).listen(7003, () => {
     console.log(`웹서버 실행됨`);
 })
