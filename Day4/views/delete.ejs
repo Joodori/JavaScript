@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>고객관리 삭제기능</title>
+    </head>
+    <body>
+
+       <div>
+            <h3>고객정보 삭제</h3>
+       </div>
+        
+       <div>
+            <form action="/page/delete" method="get">
+
+                <input type="text" name="id" value="<%= id.value %>">
+
+                <button>삭제</button>
+            </form>
+       </div>
+
+
+    </body>
+</html>
