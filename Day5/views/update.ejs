@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>고객관리</title>
+    </head>
+    <body>
+
+       <div>
+            <h3>고객정보 추가</h3>
+       </div>
+        
+       <div>
+            <form action="/person/modify" method="get">
+                <input type="hidden" name="id" value="<%= params.id %>">
+                <input type="text" name="name" value="<%= params.name %>">
+                <input type="text" name="age" value="<%= params.age %>">
+                <input type="text" name="mobile" value="<%= params.mobile %>">
+
+                <button>저장</button>
+            </form>
+
+            <form action="/person/list" method="get">
+                <button>돌아가기</button>
+            </form>
+       </div>
+
+       
+    </body>
+</html>
