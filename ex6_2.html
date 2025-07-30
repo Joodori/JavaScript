@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>연습</title>
+
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+    <style>
+        html,
+        body {
+            background-color: #eeeeee;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>연습하기</h1>
+    <div> <!-- ms : 옆을 5만큼 띄어놓음 + 버튼의 픽셀을 5만큼 늘림 + 3만큼 늘림-->
+        <button class="btn btn-primary mt-5 ms-5 px-5 py-3"><span class="fs-2 fw-bold">확인</span></button>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-center"> <!-- mt : 위를 4만큼 띄어놓음 + utilities_flex -->
+        <span class="fs-4 fw-bold">고객 목록</span> <!-- fs: font_size, fw:font_width -->
+    </div>
+
+    <div class="card mt-4 mx-4">
+        <div class="card-body">
+
+            <ul class="list-group">
+                <li class="list-group-item">
+
+                    <div class="row d-flex align-items-center"> <!--가로방향으로 1+3+2+3+3분할 가능-->
+                        <div class="col-1">
+                            <img class="rounded-circle" src="images/happy.jpg" style="width:4em; height:4em;">
+                        </div>
+                        <div class="col-3">
+                            <p>홍길동1</p>
+                        </div>
+                        <div class="col-2">
+                            <p>21</p>
+                        </div>
+                        <div class="col-3">
+                            <p>010-1000-1000</p>
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-sm btn-primary">수정</button>
+                            <button class="btn btn-sm btn-danger">삭제</button>
+                        </div>
+
+                    </div>
+
+                    <div class="row d-flex align-items-center"> <!--가로방향으로 1+3+2+3+3분할 가능-->
+                        <div class="col-1">
+                            <img class="rounded-circle" src="images/happy.jpg" style="width:4em; height:4em;">
+                        </div>
+                        <div class="col-3">
+                            <p>홍길동2</p>
+                        </div>
+                        <div class="col-2">
+                            <p>22</p>
+                        </div>
+                        <div class="col-3">
+                            <p>010-1000-1000</p>
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-sm btn-primary">수정</button>
+                            <button class="btn btn-sm btn-danger">삭제</button>
+                        </div>
+
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+
+        <div class="card-footer">
+
+            <div class="d-flex justify-content-end mt-2 mb-2">
+                <button class="btn btn-primary fw-bold">추가하기</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
